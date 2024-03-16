@@ -27,9 +27,20 @@ const bottomStyle = {
 };
 
 const Card = ({ project }) => {
+    const randomRed = Math.floor(Math.random() * 256);
+    const randomGreen = Math.floor(Math.random() * 256);
+    const randomBlue = Math.floor(Math.random() * 256);
+    const randomAlpha = Math.random() * (0.9 - 0.3) + 0.3;
+
+    const randomRGBA = `rgba(${randomRed},${randomGreen},${randomBlue},${randomAlpha})`;
+   
+    const drag = (e,project)=>{
+        console.log(e)
+      e.dataTransfer.setData("card",project)
+    }
   return (
-    <div style={containerStyle}>
-      <div style={{ ...themeStyle, backgroundColor: project.themeColor }}></div>
+    <div style={containerStyle} draggable="true" onDragStart = {(e)=>drag(e,project)} id={project}>
+      <div style={{ ...themeStyle, backgroundColor:randomRGBA }}></div>
       <h3 style={{ margin: "10px 0", color: "rgba(0,0,0,0.7)" }}>
         {project.name}
       </h3>

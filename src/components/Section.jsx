@@ -12,21 +12,37 @@ const section = {
   padding: "7px",
 };
 
+const sectionTop = {
+  display: "flex",
+  justifyContent: "space-between",
+  paddingX: "100px",
+  alignItems: "center",
+  padding: "0 20px",
+};
+
 const Section = ({ projectDetail, title }) => {
+  const allowDrop = (e) => {
+    e.preventDefault();
+  };
+
+const drop = (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData("card")
+    console.log(data)
+}
+
   return (
     <>
-      <div style={section}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            paddingX: "100px",
-            alignItems: "center",
-            padding: "0 20px",
-          }}
-        >
+      <div style={section} onDrop={(e)=>drop(e)} onDragOver={(e) => allowDrop(e)}>
+        <div style={sectionTop}>
           <h3 style={{ color: "rgba(3,3,3,0.7)" }}>{title}</h3>
-          <img src={moreIcon} alt={"moreIcon"} width={"30px"} height={"30px"} style={{opacity:"0.5"}} />
+          <img
+            src={moreIcon}
+            alt={"moreIcon"}
+            width={"30px"}
+            height={"30px"}
+            style={{ opacity: "0.5" }}
+          />
         </div>
         {projectDetail.length > 0 ? (
           <>
@@ -37,7 +53,7 @@ const Section = ({ projectDetail, title }) => {
               }}
             >
               {projectDetail.map((todo) => (
-                <Card key={todo.themeColor} project={todo} />
+                <Card key={todo.id} project={todo} />
               ))}
             </div>
           </>
