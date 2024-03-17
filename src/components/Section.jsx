@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
 import moreIcon from "../assets/more.png";
 import plus from "../assets/plus.png";
 import Card from "../components/card";
-
+import { TodoData } from "./sectionData";
 const section = {
   minWidth: "23%",
   height: "90%",
@@ -20,7 +21,40 @@ const sectionTop = {
   padding: "0 20px",
 };
 
+const modalContainer ={position:"absolute",padding:"1rem",width:"20%",height:"35%",borderRadius:"15px",border:"0.5px solid green",zIndex:1000,backgroundColor:"#ffffff",top:"32%",left:"40%",boxSizing:"border-box"}
+
+const modalStyles = {
+  heading:{textAlign:"center",color:"rgba(14,150,147,0.6)"},
+  input:{display:"block",margin:"0 auto",padding:"10px 10px",borderRadius:"15px",width:"80%",alignSelf:"center"},
+  button:{cursor:"pointer",padding:"10px 60px",color:"#ffffff",margin:"40px auto 0",borderRadius:"15px",border:"none",backgroundColor:"rgba(14,150,147,0.6)",alignSelf:"center"}
+}
 const Section = ({ projectDetail, title }) => {
+  const [projectName,setProjectName] = useState()
+  const [modal,setModal]=useState(false);
+  const [projectData,setProjectData] = useState(projectDetail)
+
+  const handleAdd = () => {
+    if(!projectName){
+   return;
+    }
+      const payload = {
+        id:Math.floor(Math.random()*(500-100)+100),
+        name: projectName,
+        comment: Math.floor(Math.random()*(30-0)+0),
+      }
+    const dataToAdd = [...projectData,payload];
+    setProjectData(dataToAdd)
+    setModal(false)
+    setProjectName("")
+     
+  }
+  useEffect(()=>{
+    
+    if(projectData){
+     return
+    }
+  },[projectData])
+ 
   const allowDrop = (e) => {
     e.preventDefault();
   };
@@ -33,6 +67,19 @@ const drop = (e) => {
 
   return (
     <>
+       {
+        modal && (
+          <>
+          <div style={modalContainer}>
+              <h2 style={modalStyles.heading}>Create To Do</h2>
+              <input type="text" placeholder={"Add project"} value={projectName} onChange={(e)=>setProjectName(e.target.value)} style={modalStyles.input}  />
+              <div style={{textAlign:"center"}}>
+              <button disabled={!projectName} style={modalStyles.button} onClick={handleAdd}>Add</button>
+              </div>
+          </div>
+          </>
+        )
+       }
       <div style={section} onDrop={(e)=>drop(e)} onDragOver={(e) => allowDrop(e)}>
         <div style={sectionTop}>
           <h3 style={{ color: "rgba(3,3,3,0.7)" }}>{title}</h3>
@@ -44,15 +91,15 @@ const drop = (e) => {
             style={{ opacity: "0.5" }}
           />
         </div>
-        {projectDetail.length > 0 ? (
+        {projectData?.length > 0 ? (
           <>
             <div
               style={{
                 minHeight: "80%",
-                overflowY: projectDetail.length > 5 ? "scroll" : "auto",
+                overflowY: projectDetail.length  > 5 ? "scroll" : "auto",
               }}
             >
-              {projectDetail.map((todo) => (
+              {projectData.map((todo) => (
                 <Card key={todo.id} project={todo} />
               ))}
             </div>
@@ -60,7 +107,7 @@ const drop = (e) => {
         ) : (
           <h5>Todo Details is not found.</h5>
         )}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div style={{ display: "flex",cursor:"pointer", alignItems: "center", gap: "10px" }} onClick={()=>setModal(true)}>
           <img
             src={plus}
             alt={"moreIcon"}
@@ -68,7 +115,9 @@ const drop = (e) => {
             height={"12px"}
             style={{ marginLeft: "1rem", color: "rgba(3,3,3,0.5)" }}
           />
-          <h3 style={{ color: "rgba(3,3,3,0.5)" }}>Add a card</h3>
+          <h3 style={{ color: "rgba(3,3,3,0.5)" }}
+          
+          >Add a card</h3>
         </div>
       </div>
     </>
