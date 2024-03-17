@@ -71,7 +71,7 @@ const drop = (e) => {
         modal && (
           <>
           <div style={modalContainer}>
-              <h2 style={modalStyles.heading}>Create To Do</h2>
+              <h2 style={modalStyles.heading}>Create {title}</h2>
               <input type="text" placeholder={"Add project"} value={projectName} onChange={(e)=>setProjectName(e.target.value)} style={modalStyles.input}  />
               <div style={{textAlign:"center",display:"flex",justifyContent:"space-around"}}>
               <button style={{...modalStyles.button,backgroundColor:"#ffffff",border:"1px solid grey",color:"rgba(0,0,0,0.6)",padding:"10px 20px"}} onClick={()=>setModal(false)}>Cancel</button>
