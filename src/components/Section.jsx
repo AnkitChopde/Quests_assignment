@@ -26,7 +26,7 @@ const modalContainer ={position:"absolute",padding:"1rem",width:"20%",height:"35
 const modalStyles = {
   heading:{textAlign:"center",color:"rgba(14,150,147,0.6)"},
   input:{display:"block",margin:"0 auto",padding:"10px 10px",borderRadius:"15px",width:"80%",alignSelf:"center"},
-  button:{cursor:"pointer",padding:"10px 60px",color:"#ffffff",margin:"40px auto 0",borderRadius:"15px",border:"none",backgroundColor:"rgba(14,150,147,0.6)",alignSelf:"center"}
+  button:{cursor:"pointer",padding:"10px 40px",color:"#ffffff",margin:"30px auto 0",borderRadius:"15px",border:"none",backgroundColor:"rgba(14,150,147,0.6)",alignSelf:"center"}
 }
 const Section = ({ projectDetail, title }) => {
   const [projectName,setProjectName] = useState()
@@ -73,7 +73,8 @@ const drop = (e) => {
           <div style={modalContainer}>
               <h2 style={modalStyles.heading}>Create To Do</h2>
               <input type="text" placeholder={"Add project"} value={projectName} onChange={(e)=>setProjectName(e.target.value)} style={modalStyles.input}  />
-              <div style={{textAlign:"center"}}>
+              <div style={{textAlign:"center",display:"flex",justifyContent:"space-around"}}>
+              <button style={{...modalStyles.button,backgroundColor:"#ffffff",border:"1px solid grey",color:"rgba(0,0,0,0.6)",padding:"10px 20px"}} onClick={()=>setModal(false)}>Cancel</button>
               <button disabled={!projectName} style={modalStyles.button} onClick={handleAdd}>Add</button>
               </div>
           </div>
