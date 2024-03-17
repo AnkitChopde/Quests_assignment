@@ -31,10 +31,10 @@ Create a new Pull Request.
 # Some screenshots of website:
 
 <h3>Sections page</h3>
-![image](https://github.com/AnkitChopde/Quests_assignment/assets/112820279/f471ce14-d8f1-4e63-bc70-b2a6999d2c4b)
+https://github.com/AnkitChopde/Quests_assignment/assets/112820279/f471ce14-d8f1-4e63-bc70-b2a6999d2c4b
 
 <h3>Create screen</h3>
-![image](https://github.com/AnkitChopde/Quests_assignment/assets/112820279/300cfed8-cf73-4fbf-8f00-b4f3a68a8dc4)
+https://github.com/AnkitChopde/Quests_assignment/assets/112820279/300cfed8-cf73-4fbf-8f00-b4f3a68a8dc4
 
 <h2>Deployed Link</h2>
 
